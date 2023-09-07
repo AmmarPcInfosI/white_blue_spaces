@@ -13,34 +13,34 @@ int findBlueUnits(List<int> a) {
   }
 
   int r = 0;
-  List<int> lMax = List.filled(a.length, 0);
-  List<int> rMax = List.filled(a.length, 0);
+  List<int> firstMax = List.filled(a.length, 0);
+  List<int> secondMax = List.filled(a.length, 0);
 
-  lMax[0] = a[0];
+  firstMax[0] = a[0];
 
-  for (int i = 1; i < lMax.length; i++) {
-    if (lMax[i - 1] > a[i]) {
-      lMax[i] = lMax[i - 1];
+  for (int i = 1; i < firstMax.length; i++) {
+    if (firstMax[i - 1] > a[i]) {
+      firstMax[i] = firstMax[i - 1];
     } else {
-      lMax[i] = a[i];
+      firstMax[i] = a[i];
     }
   }
 
-  rMax[a.length - 1] = a[a.length - 1];
+  secondMax[a.length - 1] = a[a.length - 1];
 
-  for (int j = rMax.length - 2; j >= 0; j--) {
-    if (rMax[j + 1] > a[j]) {
-      rMax[j] = rMax[j + 1];
+  for (int j = secondMax.length - 2; j >= 0; j--) {
+    if (secondMax[j + 1] > a[j]) {
+      secondMax[j] = secondMax[j + 1];
     } else {
-      rMax[j] = a[j];
+      secondMax[j] = a[j];
     }
   }
 
   for (int x = 0; x < a.length; x++) {
-    if (lMax[x] < rMax[x]) {
-      r += lMax[x];
+    if (firstMax[x] < secondMax[x]) {
+      r += firstMax[x];
     } else {
-      r += rMax[x];
+      r += secondMax[x];
     }
     r -= a[x];
   }
